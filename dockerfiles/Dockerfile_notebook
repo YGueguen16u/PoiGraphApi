@@ -1,0 +1,11 @@
+FROM jupyter/pyspark-notebook
+# FROM jupyter/base-notebook
+
+
+USER root
+RUN apt update -y && apt install -y libpq-dev python3-dev gcc g++
+USER jovyan
+
+# COPY ./requirements.txt .
+RUN pip install psycopg2-binary
+# RUN pip install -r requirements.txt

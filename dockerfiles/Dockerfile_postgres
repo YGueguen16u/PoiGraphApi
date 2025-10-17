@@ -1,0 +1,6 @@
+FROM postgres:16-alpine
+
+RUN apk update && apk add vim less
+
+ENV PAGER less
+ENV EDITOR vim
