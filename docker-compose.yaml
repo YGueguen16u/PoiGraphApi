@@ -30,6 +30,7 @@ services:
     volumes:
       - ./src:/src
       - ./src/notebooks:/home/jovyan/work
+      - ./data/raw:/home/jovyan/work/data/raw
     ports:
       - 8888:8888
     command: jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --NotebookApp.token='' --NotebookApp.password=''
