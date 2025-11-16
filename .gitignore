@@ -1,2 +1,6 @@
 .venv
 cache
+
+montpellier_poi copy.json
+montpellier_poi_filtered.json
+montpellier_poi.csv
