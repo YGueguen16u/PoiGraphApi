@@ -1,11 +1,9 @@
-FROM jupyter/pyspark-notebook
-# FROM jupyter/base-notebook
+FROM quay.io/jupyter/pyspark-notebook
 
 
 USER root
 RUN apt update -y && apt install -y libpq-dev python3-dev gcc g++
-USER jovyan
+WORKDIR /home/poi_project/
 
-# COPY ./requirements.txt .
-RUN pip install psycopg2-binary
-# RUN pip install -r requirements.txt
+RUN chown -R 1000 /home/poi_project/
+RUN cp work/postgresql-42.7.8.jar /usr/local/spark/jars/postgresql-42.7.8.jar

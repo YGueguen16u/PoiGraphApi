@@ -18,7 +18,7 @@ spark = SparkSession\
         .getOrCreate()
 
 ### open existing datafile ensuring accurate data types
-occitanie_data_file = "dataTourismeOccitanie.csv"
+occitanie_data_file = "work/dataTourismeOccitanie.csv"
 
 data_tourisme_schema = StructType([StructField("Nom_du_POI", StringType()),\
                     StructField("Categories_de_POI", StringType()),\
@@ -108,4 +108,3 @@ df_clean = df_split_3.withColumn('Nom_du_POI', lower(df_split_3['Nom_du_POI']))\
 df_unique = df_clean.dropDuplicates(['Nom_du_POI', 'Latitude', 'Longitude'])
 
 
-sc.stop()

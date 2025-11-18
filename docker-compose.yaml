@@ -1,6 +1,7 @@
 
 services:
   postgres_database:
+    container_name: pg_db
     build:
       dockerfile: dockerfiles/Dockerfile_postgres
       context: .
@@ -14,23 +15,19 @@ services:
     ports:
       - 5432:5432
   
-  # pgadmin:
-  #   container_name: pgadmin4_container
-  #   image: dpage/pgadmin4
-  #   environment:
-  #     PGADMIN_DEFAULT_USER: pgadmin
-  #     PGADMIN_DEFAULT_PASSWORD: pgadmin
-  #   ports:
-  #     - "5050:80"
-
-  notebook:
+    notebook:
+    container_name: spark_notebook
     build:
       dockerfile: dockerfiles/Dockerfile_notebook
       context: .
+    environment:
+      - NB_USER=poi_project
+      - CHOWN_HOME=yes
+      - CHOWN_EXTRA=/usr/local/spark/jars/
     volumes:
       - ./src:/src
-      - ./src/notebooks:/home/jovyan/work
-      - ./data/raw:/home/jovyan/work/data/raw
+      - ./src/notebooks:/home/poi_project/work
+      - ./data/raw:/home/poi_project/work/data/raw
     ports:
       - 8888:8888
     command: jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --NotebookApp.token='' --NotebookApp.password=''
