@@ -1,10 +1,11 @@
+--Schema for tables creation
 
 CREATE TABLE city (
   city_id SERIAL PRIMARY KEY,
   city_name VARCHAR(255) NOT NULL,
   city_postal_code VARCHAR(20),
   population INTEGER,
-  last_modification_year INTEGER
+  last_modification_year TIMESTAMP
 );
 
 CREATE TABLE category (
@@ -15,7 +16,7 @@ CREATE TABLE category (
 CREATE TABLE app_user (
   user_id SERIAL PRIMARY KEY,
   user_name VARCHAR(255) NOT NULL,
-  date_creation DATE DEFAULT CURRENT_DATE,
+  creation_date DATE DEFAULT CURRENT_DATE,
   long NUMERIC(9,6),
   lat NUMERIC(9,6)
 );
@@ -37,7 +38,6 @@ CREATE TABLE category_poi (
   category_poi_id SERIAL PRIMARY KEY,
   poi_id INTEGER REFERENCES poi(poi_id),
   category_id INTEGER REFERENCES category(category_id),
-  UNIQUE(poi_id, category_id)
 );
 
 CREATE TABLE user_profile (
@@ -52,7 +52,6 @@ CREATE TABLE category_user_profile (
   category_user_profile_id SERIAL PRIMARY KEY,
   category_id INTEGER REFERENCES category(category_id),
   user_profile_id INTEGER REFERENCES user_profile(user_profile_id),
-  UNIQUE(category_id, user_profile_id)
 );
 
 CREATE TABLE itinerary_step (
@@ -65,8 +64,8 @@ CREATE TABLE itinerary (
   poi_id INTEGER REFERENCES poi(poi_id),
   itinerary_step_id INTEGER REFERENCES itinerary_step(itinerary_step_id),
   duration INTEGER,
-  start_poi_id INTEGER REFERENCES poi(poi_id),
-  end_poi_id INTEGER REFERENCES poi(poi_id),
+  --start_poi_id INTEGER REFERENCES poi(poi_id),
+  --end_poi_id INTEGER REFERENCES poi(poi_id),
   step_order INTEGER,
   PRIMARY KEY (user_id, poi_id, itinerary_step_id)
 );
