@@ -11,11 +11,11 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=dfs
+      - POSTGRES_DB=poi_db
     ports:
       - 5432:5432
   
-    notebook:
+  notebook:
     container_name: spark_notebook
     build:
       dockerfile: dockerfiles/Dockerfile_notebook

@@ -25,7 +25,7 @@ with open('work/data_transform/cleanDataTourismeSpark.py') as f:
 df_unique.write \
        .mode('overwrite') \
        .format("jdbc") \
-       .option("url", "jdbc:postgresql://pg_db:5432/poi") \
+       .option("url", "jdbc:postgresql://pg_db:5432/poi_db") \
        .option("dbtable", "poi") \
        .option("user", "postgres") \
        .option("password", "postgres") \

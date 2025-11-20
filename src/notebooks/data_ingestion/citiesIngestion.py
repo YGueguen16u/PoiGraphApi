@@ -25,7 +25,7 @@ with open('work/data_transform/cleanCitiesSpark.py') as f:
 occitanie_cities.write \
        .mode('overwrite') \
        .format("jdbc") \
-       .option("url", "jdbc:postgresql://pg_db:5432/city") \
+       .option("url", "jdbc:postgresql://pg_db:5432/poi_db") \
        .option("dbtable", "city") \
        .option("user", "postgres") \
        .option("password", "postgres") \

@@ -19,7 +19,7 @@ spark = SparkSession\
 
 ### open existing datafile 
 
-data_folder = './data/raw/'
+data_folder = 'work/'
 pop_france_data = data_folder+'DS_POPULATIONS_REFERENCE_data.csv'
 df = spark.read.option("inferSchema", True)\
                .option("delimiter", ";")\
@@ -85,4 +85,3 @@ codes_clean = codes_clean.dropDuplicates(['Code_commune_INSEE'])
 # innerjoin between occitanie file and codes file
 occitanie_cities = df_occitanie_clean.join(codes_clean, on=['Code_commune_INSEE'], how='inner')
 
-sc.stop()
