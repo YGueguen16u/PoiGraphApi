@@ -1,0 +1,147 @@
+{
+  "amenity": {
+    "sustenance" : [
+        "bar",
+        "cafe",
+        "fast_food",
+        "food_court",
+        "ice_cream",
+        "pub",
+        "restaurant"
+    ],
+    "transportation" : [
+        "bicycle_parking",
+        "bicycle_repair_station",
+        "bicycle_rental",
+        "boat_rental",
+        "car_rental",
+        "car_sharing",
+        "car_wash",
+        "vehicle_inspection",
+        "charging_station",
+        "ferry_terminal",
+        "fuel",
+        "motorcycle_parking",
+        "parking",
+        "parking_entrance",
+        "parking_space",
+        "taxi"
+    ],
+    "financial" : [
+        "atm",
+        "bank"
+    ],
+    "healthcare" : [
+        "clinic",
+        "dentist",
+        "doctors",
+        "pharmacy",
+        "hospital"
+    ],
+    "entertainment, arts and culture" : [
+        "arts_centre",
+        "casino",
+        "cinema",
+        "fountain",
+        "nightclub",
+        "planetarium",
+        "theatre"
+    ],
+    "public services" : [
+        "courthouse",
+        "fire_station",
+        "police",
+        "post_box",
+        "post_office",
+        "townhall"
+    ]
+  },
+  "building": {
+    "accommodation" : [
+        "hotel"
+    ],
+    "commercial" : [
+        "retail",
+        "supermarket"
+    ],
+    "religious" : [
+        "cathedral",
+        "church",
+        "mosque",
+        "synagogue"
+    ]
+  },
+  "leisure": {
+    "leisure" : [
+        "adult_gaming_centre",
+        "amusement_arcade",
+        "dance",
+        "escape_game",
+        "fishing",
+        "fitness_centre",
+        "fitness_station",
+        "horse_riding",
+        "golf",
+        "miniature_golf",
+        "park",
+        "sports_centre",
+        "swimming_area",
+        "swimming_pool"
+    ]
+  },
+  "shop": {
+    "food, beverages" : [
+        "bakery",
+        "butcher",
+        "cheese",
+        "chocolate",
+        "cafe",
+        "confectionery",
+        "convenience",
+        "deli",
+        "food",
+        "frozen_food",
+        "greengrocer",
+        "ice_cream",
+        "pastry",
+        "seafood",
+        "speciality",
+        "tea"
+    ],
+    "general store, department store, mall" : [
+        "department_store",
+        "general",
+        "supermarket",
+        "mall"
+    ],
+    "clothing, shoes, accessories" : [
+        "bag",
+        "clothes",
+        "jewelry",
+        "shoes",
+        "watches"
+    ]
+  },
+  "tourism": {
+    "tourism": [
+        "apartment",
+        "aquarium",
+        "artwork",
+        "attraction",
+        "camp_pitch",
+        "camp_site",
+        "caravan_site",
+        "gallery",
+        "guest_house",
+        "hostel",
+        "hotel",
+        "information",
+        "motel",
+        "museum",
+        "picnic_site",
+        "theme_park",
+        "viewpoint",
+        "zoo"
+    ]
+  }
+}

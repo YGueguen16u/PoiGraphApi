@@ -1,9 +1,17 @@
 .venv
 cache
 
+src/osm_extract.py
+
+src/output/
+src/montpellier_poi_spark.json
 montpellier_poi copy.json
+montpellier_poi.json
 montpellier_poi_filtered.json
 montpellier_poi.csv
+
+notes.md
+
 
 .DS_Store
 .ipynb_checkpoints/

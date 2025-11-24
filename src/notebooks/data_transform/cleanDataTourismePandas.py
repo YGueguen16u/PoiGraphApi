@@ -18,7 +18,7 @@ print("\nbasic statistics of quantitative variable:\n", df.describe())
 
 # deduplication  
 if df.duplicated().sum() != 0:
-    df2 = df.drop_duplicates() 
+    df2 = df.drop_duplicates()  
 else:
     df2 = df
 

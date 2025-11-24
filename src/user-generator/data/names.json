@@ -1,0 +1,43 @@
+{
+  "male_first_names": [
+    "Lucas", 
+    "Hugo", 
+    "Nathan", 
+    "Enzo", 
+    "Louis", 
+    "Paul", 
+    "Noah",
+    "Romuald",
+    "Rémi",
+    "Mathieu",
+    "Antoine",
+    "Léo",
+    "Maxime",
+    "Adrien",
+    "Léon"
+  ],
+  "female_first_names": [
+    "Emma", 
+    "Léa", 
+    "Chloé", 
+    "Inès", 
+    "Manon", 
+    "Sarah", 
+    "Lina", 
+    "Clara", 
+    "Valérie", 
+    "Camille", 
+    "Émilie",
+    "Charlote" 
+  ],
+  "last_names": [
+    "Dupont", 
+    "Martin", 
+    "Lefebvre", 
+    "Romualdo", 
+    "Durand", 
+    "Garcia", 
+    "Kebab",
+    "Tacos trois Viandes"
+  ]
+}
