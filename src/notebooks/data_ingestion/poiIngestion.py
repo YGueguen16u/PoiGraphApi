@@ -4,7 +4,6 @@ from pyspark.sql.functions import *
 from pyspark.sql.types import *
 from pyspark.conf import SparkConf
 from pyspark import SparkContext
-from osm.spark_osm.extractor import extract_city_poi
 
 conf = SparkConf()
 conf.set("spark.log.level", "error") # To display only errors

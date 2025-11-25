@@ -12,6 +12,20 @@ montpellier_poi.csv
 
 notes.md
 
-
-.DS_Store
 .ipynb_checkpoints/
+
+# macOS system files
+.DS_Store
+**/.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon?
+Icon
+
+# Thumbnails
+._*
+
+# macOS metadata
+.Spotlight-V100
+.Trashes
