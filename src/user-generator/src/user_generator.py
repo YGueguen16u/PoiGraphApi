@@ -25,8 +25,8 @@ class RandomUserGenerator:
             "food_lover",
             "sport_addict",
             "culture_seeker",
-            "nightlife_explorer",
-            "shopaholic",
+            "nightlife",
+            "shopping",
             "balanced"
         ]
 
@@ -85,14 +85,14 @@ class RandomUserGenerator:
                     if "fitness" in thematic_group_lower or "sports" in thematic_group_lower:
                         preferences.extend(subcats)
 
-                # culture + arts + tourism (BEAUCOUP)
+                # culture + arts + tourism
                 elif profile_type == "culture_seeker":
                     if "culture" in thematic_group_lower or "tourism" in thematic_group_lower \
                     or "art" in thematic_group_lower or "museum" in thematic_group_lower:
                         preferences.extend(subcats)
 
                 # late-attraction + tourism
-                elif profile_type == "nightlife_explorer":
+                elif profile_type == "nightlife":
                     if "bar" in thematic_group_lower or "nightclub" in thematic_group_lower:
                         preferences.extend(subcats)
 
