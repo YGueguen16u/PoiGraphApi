@@ -1,9 +1,9 @@
-# src/notebooks/data_ingestion/poiIngestion.py
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
 from pyspark.conf import SparkConf
 from pyspark import SparkContext
+from etl.data_transform.cleanDataTourismeSpark import get_poi_datatourisme
 
 conf = SparkConf()
 conf.set("spark.log.level", "error") # To display only errors
@@ -19,11 +19,13 @@ spark = SparkSession\
         .master("local[*]")\
         .getOrCreate()
 
-with open('work/data_transform/cleanDataTourismeSpark.py') as f:
-    exec(f.read())
+# with open('work/data_transform/cleanDataTourismeSpark.py') as f:
+#     exec(f.read())
 # We have sourced df_unique from data_transform
 
-df_unique.write \
+poi_datatourisme = get_poi_datatourisme()
+
+poi_datatourisme.write \
        .mode('overwrite') \
        .format("jdbc") \
        .option("url", "jdbc:postgresql://pg_db:5432/poi_db") \
