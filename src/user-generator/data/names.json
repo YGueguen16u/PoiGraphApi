@@ -1,0 +1,46 @@
+
+/**src/user-generator/data/names.json*/
+{
+  "male_first_names": [
+    "Lucas",
+    "Hugo",
+    "Nathan",
+    "Enzo",
+    "Louis",
+    "Paul",
+    "Noah",
+    "Romuald",
+    "Rémi",
+    "Mathieu",
+    "Antoine",
+    "Léo",
+    "Maxime",
+    "Adrien",
+    "Léon"
+  ],
+  "female_first_names": [
+    "Emma",
+    "Léa",
+    "Chloe",
+    "Inès",
+    "Manon",
+    "Sarah",
+    "Lina",
+    "Clara",
+    "Valérie",
+    "Camille",
+    "Emilie",
+    "Charlote"
+  ],
+  "last_names": [
+    "Dupont",
+    "Martin",
+    "Lefebvre",
+    "Romualdo",
+    "Durand",
+    "Garcia",
+    "Fournel",
+    "Robin",
+    "Dumont"
+  ]
+}
