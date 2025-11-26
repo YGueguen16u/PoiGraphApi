@@ -1,6 +1,8 @@
 .venv
 cache
 
+data/
+
 src/osm_extract.py
 
 src/output/
@@ -31,3 +33,4 @@ Icon
 .Trashes
 
 **/anal
+
