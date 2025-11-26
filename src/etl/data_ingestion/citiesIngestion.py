@@ -4,6 +4,7 @@ from pyspark.sql.functions import *
 from pyspark.sql.types import *
 from pyspark.conf import SparkConf
 from pyspark import SparkContext
+from etl.data_transform.cleanCitiesSpark import get_occitanie_cities
 
 conf = SparkConf()
 conf.set("spark.log.level", "error") # To display only errors
@@ -19,9 +20,10 @@ spark = SparkSession\
         .master("local[*]")\
         .getOrCreate()
 
-with open('work/data_transform/cleanCitiesSpark.py') as f:
-    exec(f.read())
+# with open('work/data_transform/cleanCitiesSpark.py') as f:
+#     exec(f.read())
 # We have sourced occitanie_cities from data_transform
+occitanie_cities = get_occitanie_cities()
 
 occitanie_cities.write \
        .mode('overwrite') \

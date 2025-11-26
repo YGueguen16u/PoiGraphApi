@@ -10,8 +10,10 @@ services:
       - ./data/sql:/dump-data
     environment:
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_PASSWORD=/run/secrets/pg_secret
       - POSTGRES_DB=poi_db
+    secrets:
+      - pg_secret
     ports:
       - 5432:5432
   
@@ -24,10 +26,29 @@ services:
       - NB_USER=poi_project
       - CHOWN_HOME=yes
       - CHOWN_EXTRA=/usr/local/spark/jars/
+    secrets:
+      - api_auth_secret
+      - snowflake_user
+      - snowflake_secret
+      - snowflake_account
     volumes:
       - ./src:/src
-      - ./src/notebooks:/home/poi_project/work
+      - .:/home/poi_project/
       - ./data/raw:/home/poi_project/work/data/raw
     ports:
       - 8888:8888
-    command: jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --NotebookApp.token='' --NotebookApp.password=''
+      - 0.0.0.0:8000:8000
+    # command: jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --NotebookApp.token='' --NotebookApp.password=''
+    command: uvicorn src.api.data_api:app --app-dir src --reload
+
+secrets:
+   pg_secret:
+     file: ./secrets/pg_secret.txt
+   api_auth_secret:
+     file: ./secrets/api_auth_secret.txt
+   snowflake_user:
+     file: ./secrets/snowflake_user.txt
+   snowflake_secret:
+     file: ./secrets/snowflake_secret.txt
+   snowflake_account:
+     file: ./secrets/snowflake_account.txt

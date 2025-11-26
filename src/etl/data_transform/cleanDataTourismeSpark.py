@@ -3,10 +3,13 @@ from pyspark.sql.functions import *
 from pyspark.sql.types import *
 from pyspark.conf import SparkConf
 from pyspark import SparkContext
+from utils.checkMissingValues import getMissingValues, missingTable
+
 
 conf = SparkConf()
 conf.set("spark.log.level", "error") # To display only errors
 conf.set("spark.ui.showConsoleProgress", "false") # To display only Spark jobs progression in Python
+
 
 ### definition of SparkContext
 sc = SparkContext.getOrCreate(conf=conf) 
@@ -18,7 +21,8 @@ spark = SparkSession\
         .getOrCreate()
 
 ### open existing datafile ensuring accurate data types
-occitanie_data_file = "work/dataTourismeOccitanie.csv"
+# occitanie_data_file = "work/dataTourismeOccitanie.csv"
+occitanie_data_file = "src/etl/dataTourismeOccitanie.csv"
 
 data_tourisme_schema = StructType([StructField("Nom_du_POI", StringType()),\
                     StructField("Categories_de_POI", StringType()),\
@@ -107,4 +111,11 @@ df_clean = df_split_3.withColumn('Nom_du_POI', lower(df_split_3['Nom_du_POI']))\
 
 df_unique = df_clean.dropDuplicates(['Nom_du_POI', 'Latitude', 'Longitude'])
 
+missingTable(getMissingValues(df_unique))
+
+def get_poi_datatourisme():
+    return df_unique
+
+def get_poi_datatourisme_dict():
+    return df_unique.toPandas().to_dict(orient='records')
 

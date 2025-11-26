@@ -1,6 +1,17 @@
 .venv
 cache
 
+src/poi_env/
+**/__pycache__
+
+.bash_history
+.cache/
+.jupyter/
+.local/
+.rustup/
+
+secrets/
+
 src/osm_extract.py
 
 src/output/

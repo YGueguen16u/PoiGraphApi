@@ -3,6 +3,7 @@ from pyspark.sql.functions import *
 from pyspark.sql.types import *
 from pyspark.conf import SparkConf
 from pyspark import SparkContext
+from utils.checkMissingValues import getMissingValues, missingTable
 
 conf = SparkConf()
 conf.set("spark.log.level", "error") # To display only errors
@@ -19,7 +20,8 @@ spark = SparkSession\
 
 ### open existing datafile 
 
-data_folder = 'work/'
+data_folder = 'src/etl/'
+# data_folder = 'work/'
 pop_france_data = data_folder+'DS_POPULATIONS_REFERENCE_data.csv'
 df = spark.read.option("inferSchema", True)\
                .option("delimiter", ";")\
@@ -85,3 +87,10 @@ codes_clean = codes_clean.dropDuplicates(['Code_commune_INSEE'])
 # innerjoin between occitanie file and codes file
 occitanie_cities = df_occitanie_clean.join(codes_clean, on=['Code_commune_INSEE'], how='inner')
 
+missingTable(getMissingValues(occitanie_cities))
+
+def get_occitanie_cities():
+    return occitanie_cities
+
+def get_occitanie_cities_dict():
+    return occitanie_cities.toPandas().to_dict(orient='records')
