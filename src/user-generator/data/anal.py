@@ -1,18 +1,17 @@
+# src/user-generator/data/anal.py
 import pandas as pd
 
 # Charger le CSV
-df = pd.read_csv("poi_profile_matrix.csv")
+df = pd.read_csv("src/user-generator/data/poi_profile_matrix.csv", index_col=0)
 
 print("=== Aperçu du fichier ===")
-print(df.head(), "\n")
+print(df.head(10), "\n")
 
 print("=== Info colonnes ===")
 print(df.info(), "\n")
 
-# Conversion automatique en float (sauf la colonne des profils)
-for col in df.columns:
-    if col != "profile_type":
-        df[col] = df[col].astype(float)
+# Convertir toutes les colonnes en float
+df = df.astype(float)
 
-print("=== Vérification des types ===")
-print(df.dtypes)
+print("=== DataFrame converti ===")
+print(df.head(10))
