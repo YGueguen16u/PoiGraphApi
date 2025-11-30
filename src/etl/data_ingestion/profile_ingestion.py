@@ -10,7 +10,7 @@ import uuid
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(ROOT)  
 
-from src.user_generator import RandomUserGenerator
+from src.user_generator.src.user_generator import RandomUserGenerator
 from src.user_generator.src.utils.pg_lookup import get_category_id
 
 # Spark init
