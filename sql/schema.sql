@@ -37,7 +37,7 @@ CREATE TABLE poi (
 CREATE TABLE category_poi (
   category_poi_id SERIAL PRIMARY KEY,
   poi_id INTEGER REFERENCES poi(poi_id),
-  category_id INTEGER REFERENCES category(category_id),
+  category_id INTEGER REFERENCES category(category_id)
 );
 
 CREATE TABLE user_profile (
@@ -51,7 +51,7 @@ CREATE TABLE user_profile (
 CREATE TABLE category_user_profile (
   category_user_profile_id SERIAL PRIMARY KEY,
   category_id INTEGER REFERENCES category(category_id),
-  user_profile_id INTEGER REFERENCES user_profile(user_profile_id),
+  user_profile_id INTEGER REFERENCES user_profile(user_profile_id)
 );
 
 CREATE TABLE itinerary_step (
