@@ -2,7 +2,7 @@ import pandas as pd
 import requests
 import zipfile
 
-data_folder = 'work/'
+data_folder = 'app_data/raw/'
 pop_data_archive = 'DS_POPULATIONS_REFERENCE_CSV_FR.zip'
 
 url = "https://api.insee.fr/melodi/file/DS_POPULATIONS_REFERENCE/DS_POPULATIONS_REFERENCE_CSV_FR"

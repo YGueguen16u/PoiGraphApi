@@ -11,6 +11,7 @@ src/poi_env/
 .rustup/
 
 secrets/
+app_data/cleaned_data/
 
 src/osm_extract.py
 

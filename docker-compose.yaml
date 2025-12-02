@@ -6,12 +6,12 @@ services:
       dockerfile: dockerfiles/Dockerfile_postgres
       context: .
     volumes:
-      - ./data/db:/var/lib/postgresql/data
-      - ./data/sql:/dump-data
+      - ./pg_data:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=/run/secrets/pg_secret
       - POSTGRES_DB=poi_db
+      - PGDATA= /var/lib/postgresql/data/pg_data
     secrets:
       - pg_secret
     ports:
@@ -32,15 +32,13 @@ services:
       - snowflake_secret
       - snowflake_account
     volumes:
-      - ./src:/src
       - .:/home/poi_project/
-      - ./data/raw:/home/poi_project/work/data/raw
+      - ./app_data/raw:/home/poi_project/app_data/raw
     ports:
       - 8888:8888
-      - 0.0.0.0:8000:8000
-    # command: jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --NotebookApp.token='' --NotebookApp.password=''
-    command: uvicorn src.api.data_api:app --app-dir src --reload
-
+      - 8000:8000
+    command: uvicorn src.api.data_api:app --app-dir . --reload
+   
 secrets:
    pg_secret:
      file: ./secrets/pg_secret.txt
