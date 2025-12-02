@@ -1,0 +1,9 @@
+FROM quay.io/jupyter/pyspark-notebook
+
+
+USER root
+RUN apt update -y && apt install -y libpq-dev python3-dev gcc g++
+WORKDIR /home/poi_project/
+
+RUN chown -R 1000 /home/poi_project/
+# RUN cp work/postgresql-42.7.8.jar /usr/local/spark/jars/postgresql-42.7.8.jar
