@@ -1,7 +1,17 @@
 .venv
 cache
 
-data/
+src/poi_env/
+**/__pycache__
+
+.bash_history
+.cache/
+.jupyter/
+.local/
+.rustup/
+
+secrets/
+app_data/cleaned_data/
 
 src/osm_extract.py
 
@@ -34,3 +44,6 @@ Icon
 
 **/anal
 
+**/test_user_generator.py
+
+/data/
