@@ -7,4 +7,11 @@
 
 Important pour éviter les conflits de merge et garder un historique propre : on fait un pull sur develop pour le mettre à jour et après on crée la branche individuelle. Une fois que le travail est finalisé, avant de passer en code review et de merger sur develop, il faut rebaser la branche avec develop de nouveau mis à jour.
 
+## Secrets:
+Des secrets Docker ont été mis en place pour protéger les données sensibles comme les identifiants de connexion. Ces secrets sont pris en charge par docker compose qui les passe comme données d'environnement dans les différents containers. Ils sont déclarés uniquement dans le docker-compose.yaml en faisant appel à un répertoire /secrets placé à la racine du projet. 
+
+Ce répertoire /secrets est déclaré dans le .gitignore pour ne pas être commité. Il contient un fichier par secret dont le nom est déclaré dans le docker-compose.yaml. Chaque fichier .txt contient uniquement le secret à protéger sous forme de chaîne de caractère. Le répertoire et tous les fichiers doivent être ajoutés à la racine du projet avant de lancer le docker compose up.
+
+Les secrets sont ensuite accédés dans le code soit à travers les variables d'environnement, soit en scannant les fichiers texte.    
+
 ## Description du projet:
