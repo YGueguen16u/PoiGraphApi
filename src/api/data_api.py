@@ -52,22 +52,22 @@ schema_name = 'public'
 
 # session = Session.builder.configs(connection_parameters).create()
 
-# conn = snowflake.connector.connect(
-#     user=_get_secret("snowflake_user"),
-#     password=_get_secret("snowflake_secret"),
-#     account=_get_secret("snowflake_account"),
-#     warehouse = warehouse_name,
-#     database = database_name,
-#     schema = schema_name,
-#     role = 'ACCOUNTADMIN'
-#     )
+conn = snowflake.connector.connect(
+    user=_get_secret("snowflake_user"),
+    password=_get_secret("snowflake_secret"),
+    account=_get_secret("snowflake_account"),
+    warehouse = warehouse_name,
+    database = database_name,
+    schema = schema_name,
+    role = 'ACCOUNTADMIN'
+    )
 
-# cursor = conn.cursor()
+cursor = conn.cursor()
 
-# cursor.execute("SELECT * FROM app_user")
-# rows = cursor.fetchall()
-# for row in rows:
-#     print(row)
+cursor.execute("SELECT * FROM app_user")
+rows = cursor.fetchall()
+for row in rows:
+    print(row)
 
 
-# conn.close()
+conn.close()

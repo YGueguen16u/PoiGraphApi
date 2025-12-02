@@ -6,7 +6,7 @@ from src.utils.getSecrets import _get_secret
 security = HTTPBasic()
 
 def authenticate_user(credentials: HTTPBasicCredentials = Depends(security)):
-    # In a real application, you'd verify against a database
+
     correct_username = secrets.compare_digest(credentials.username, "admin")
     correct_password = secrets.compare_digest(credentials.password, _get_secret("api_auth_secret"))
 
