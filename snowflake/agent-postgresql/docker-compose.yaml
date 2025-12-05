@@ -1,0 +1,13 @@
+
+services:
+  postgres_connector_agent:
+    container_name: postgres_connector_agent
+    image: snowflakedb/database-connector-agent:6.11.2
+    restart: unless-stopped
+    volumes:
+      - ./agent-keys:/home/agent/.ssh
+      - ./configuration/snowflake.json:/home/agent/snowflake.json
+      - ./configuration/datasources.json:/home/agent/datasources.json
+    env_file:
+      - ./configuration/postgresql.conf
+    mem_limit: 6g

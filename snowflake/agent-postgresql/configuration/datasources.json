@@ -1,0 +1,9 @@
+{
+  "PSQLDS1": {
+    "url": "jdbc:postgresql://host.docker.internal:5432/poi_db",
+    "username": "sf_replication",
+    "password": "SNOWFLAKEPOI",
+    "publication": "sf_poi_publication",
+    "ssl": false
+  }
+}

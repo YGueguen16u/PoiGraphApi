@@ -1,0 +1,57 @@
+
+services:
+  postgres_database:
+    container_name: pg_db
+    build:
+      dockerfile: dockerfiles/Dockerfile_postgres
+      context: .
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=/run/secrets/pg_secret
+      - POSTGRES_DB=poi_db
+      - PGDATA= /var/lib/postgresql/data/pg_data
+    secrets:
+      - pg_secret
+    ports:
+      - 5432:5432
+  
+  notebook:
+    container_name: spark_notebook
+    build:
+      dockerfile: dockerfiles/Dockerfile_notebook
+      context: .
+    environment:
+      - NB_USER=poi_project
+      - CHOWN_HOME=yes
+      - CHOWN_EXTRA=/usr/local/spark/jars/
+    secrets:
+      - api_auth_secret
+      - snowflake_user
+      - snowflake_secret
+      - snowflake_account
+    secrets:
+      - api_auth_secret
+      - snowflake_user
+      - snowflake_secret
+      - snowflake_account
+    volumes:
+      - .:/home/poi_project/
+      - ./app_data/raw:/home/poi_project/app_data/raw
+    ports:
+      - 8888:8888
+      - 8000:8000
+    command: uvicorn src.api.data_api:app --app-dir . --reload
+   
+secrets:
+   pg_secret:
+     file: ./secrets/pg_secret.txt
+   api_auth_secret:
+     file: ./secrets/api_auth_secret.txt
+   snowflake_user:
+     file: ./secrets/snowflake_user.txt
+   snowflake_secret:
+     file: ./secrets/snowflake_secret.txt
+   snowflake_account:
+     file: ./secrets/snowflake_account.txt
