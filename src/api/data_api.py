@@ -6,7 +6,7 @@ from src.etl.data_transform.cleanCitiesSpark import get_occitanie_cities_dict
 from src.etl.data_transform.cleanDataTourismeSpark import get_poi_datatourisme_dict
 from src.utils.getSecrets import _get_secret
 import snowflake.connector 
- 
+import pandas as pd 
 
 # from snowflake.snowpark import Session
 # from snowflake.core import Root
@@ -53,40 +53,50 @@ async def get_transformed_cities(current_user: str = Depends(authenticate_user))
 
 
 ### Snowflake Data API
-warehouse_name = 'POI_CONNECTOR_OPS_WH'
-database_name = 'POI_POSTGRES_RAW'
+warehouse_name = 'COMPUTE_WH'
+# warehouse_name = 'POI_CONNECTOR_OPS_WH'
+database_name = 'POI_PG_RAW'
+# database_name = 'POI_POSTGRES_RAW'
 schema_name = 'SCHEMA_POI'
 
-# See if needed
+conn = snowflake.connector.connect(
+    user=_get_secret("snowflake_user"),
+    password=_get_secret("snowflake_secret"),
+    account=_get_secret("snowflake_account"),
+    warehouse = warehouse_name,
+    database = database_name,
+    schema = schema_name,
+    role = 'ACCOUNTADMIN'
+    )
 
-# connection_parameters = dict(
-#     user=_get_secret("snowflake_user"),
-#     password=_get_secret("snowflake_secret"),
-#     account=_get_secret("snowflake_account"),
-#     warehouse = warehouse_name,
-#     database = database_name,
-#     schema = schema_name
-#     # role = 'role if needed'
-# )
+@app.get("/data/store/poi/datatourisme")
+async def get_stored_poi_datatourisme(current_user: str = Depends(authenticate_user)):
+    ''' allow to retrieve poi data from Snowflake storage after ingestion in PostGreSQL (protected URL)
+    '''
+    cursor = conn.cursor()
+    try:
+        cursor.execute("SELECT * FROM POI LIMIT 50")
+        print("pandas fetching \n")
+        df = cursor.fetch_pandas_all()
+        print(df.head(10))
+        return df.to_dict(orient = 'records')
+    except snowflake.connector.errors.ProgrammingError as e:
+        print('Error {0} ({1}): {2} ({3})'.format(e.errno, e.sqlstate, e.msg, e.sfqid))
+    finally:
+        cursor.close()
 
-# session = Session.builder.configs(connection_parameters).create()
-
-# conn = snowflake.connector.connect(
-#     user=_get_secret("snowflake_user"),
-#     password=_get_secret("snowflake_secret"),
-#     account=_get_secret("snowflake_account"),
-#     warehouse = warehouse_name,
-#     database = database_name,
-#     schema = schema_name,
-#     role = 'ACCOUNTADMIN'
-#     )
-
-# cursor = conn.cursor()
-
-# cursor.execute("SELECT * FROM POI")
-# rows = cursor.fetchall()
-# for row in rows:
-#     print(row)
-
-
-# conn.close()
+@app.get("/data/store/cities")
+async def get_stored_cities(current_user: str = Depends(authenticate_user)):
+    ''' allow to retrieve city data from Snowflake storage after ingestion in PostGreSQL (protected URL)
+    '''
+    cursor = conn.cursor()
+    try:
+        cursor.execute("SELECT * FROM CITY LIMIT 50")
+        print("pandas fetching \n")
+        df = cursor.fetch_pandas_all()
+        print(df.head(10))
+        return df.to_dict(orient = 'records')
+    except snowflake.connector.errors.ProgrammingError as e:
+        print('Error {0} ({1}): {2} ({3})'.format(e.errno, e.sqlstate, e.msg, e.sfqid))
+    finally:
+        cursor.close()
