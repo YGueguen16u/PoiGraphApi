@@ -46,4 +46,4 @@ Icon
 
 **/test_user_generator.py
 
-/data/
+logs/scheduler/*

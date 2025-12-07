@@ -8,8 +8,6 @@ from src.utils.getSecrets import _get_secret
 import snowflake.connector 
 import pandas as pd 
 
-# from snowflake.snowpark import Session
-# from snowflake.core import Root
 
 app = FastAPI(title="data POI project", version="1.0.0")
 
