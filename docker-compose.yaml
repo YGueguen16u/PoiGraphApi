@@ -11,7 +11,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=/run/secrets/pg_secret
       - POSTGRES_DB=poi_db
-      - PGDATA= /var/lib/postgresql/data/pg_data
+      - PGDATA=/var/lib/postgresql/data/pg_data
     secrets:
       - pg_secret
     ports:
@@ -31,18 +31,13 @@ services:
       - snowflake_user
       - snowflake_secret
       - snowflake_account
-    secrets:
-      - api_auth_secret
-      - snowflake_user
-      - snowflake_secret
-      - snowflake_account
     volumes:
       - .:/home/poi_project/
       - ./app_data/raw:/home/poi_project/app_data/raw
     ports:
       - 8888:8888
       - 8000:8000
-    command: uvicorn src.api.data_api:app --app-dir . --reload
+    command: uvicorn src.api.data_api:app --app-dir . --reload --host 0.0.0.0
    
 secrets:
    pg_secret:

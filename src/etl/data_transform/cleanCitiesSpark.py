@@ -81,15 +81,26 @@ def cleanCities():
 
     # clean nom commune : lowercase no whitespace
     codes_clean = codes.withColumn('Nom_de_la_commune',lower(regexp_replace(codes['Nom_de_la_commune'], ' ','_')))
+
+    print("----------  number of values in dataset :\n")
+    print(codes_clean.count())
+
+    print("----------  number of duplicates in dataset :\n")
+    def return_duplicates(df):
+      return(df.groupBy(df.columns).agg(count("*").alias("duplicates")).filter(col("duplicates") >= 2))
+
+    print(return_duplicates(codes_clean).sort("duplicates", ascending=False).count())
+    
     # drop duplicates
     codes_clean = codes_clean.dropDuplicates(['Code_commune_INSEE'])
 
     # innerjoin between occitanie file and codes file
     occitanie_cities = df_occitanie_clean.join(codes_clean, on=['Code_commune_INSEE'], how='inner')
 
+    print("----------  number of Nas and null values :\n")
     missingTable(getMissingValues(occitanie_cities))
 
-    occitanie_cities.write.csv("app_data/cleaned_data/cities_clean.csv", header= True, sep=',')
+    occitanie_cities.write.mode("overwrite").csv("app_data/cleaned_data/cities_clean.csv", header= True, sep=',')
 
     return occitanie_cities
 

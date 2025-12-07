@@ -78,7 +78,7 @@ def cleanDataTourismePOI():
 
     df_split_3 = df_split_2.withColumn('Categories_de_POI_niveau1', split(df_split_2['Cat_POI_first_init'], '\|')[0])\
         .withColumn('Categories_de_POI_niveau2', split(df_split_2['Cat_POI_second_init'], '\|')[0])
-    df_split_3.select(['Categories_de_POI_niveau1', 'Categories_de_POI_niveau2']).show(5)
+    # df_split_3.select(['Categories_de_POI_niveau1', 'Categories_de_POI_niveau2']).show(5)
     df_split_3 = df_split_3.drop(*['Categories_de_POI', 'Cat_POI_first_init', 'Cat_POI_second_init'])
 
 
@@ -102,18 +102,23 @@ def cleanDataTourismePOI():
     ### deduplication according to POI_name, latitude and longitude 
 
     #for checking purpose only
-    # def return_duplicates(df):
-    #   return(df.groupBy(df.columns).agg(count("*").alias("duplicates")).filter(col("duplicates") >= 2))
+    def return_duplicates(df):
+      return(df.groupBy(df.columns).agg(count("*").alias("duplicates")).filter(col("duplicates") >= 2))
 
-    # print("count_duplicates :", return_duplicates(df_clean).sort("duplicates", ascending=False).count())
+    print("----------  number of values in dataset :\n")
+    print(df_clean.count())
+
+    print("----------  number of duplicates in dataset :\n")
+    print(return_duplicates(df_clean).sort("duplicates", ascending=False).count())
     # return_duplicates(df_clean).sort("duplicates", ascending=False).show(10)
-    # print("df_clean.count :", df_clean.count())
+    
 
     df_unique = df_clean.dropDuplicates(['Nom_du_POI', 'Latitude', 'Longitude'])
 
+    print("----------  number of Nas and null values :\n")
     missingTable(getMissingValues(df_unique))
 
-    df_unique.write.csv("app_data/cleaned_data/poi_datatourisme_clean.csv", header= True, sep=',')
+    df_unique.write.mode("overwrite").csv("app_data/cleaned_data/poi_datatourisme_clean.csv", header= True, sep=',')
 
     return df_unique
 
